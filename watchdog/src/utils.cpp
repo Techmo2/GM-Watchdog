@@ -81,7 +81,7 @@ void Utils::PrintC(Color& c, const char* msg, ...) {
 	Utils::LogC("Configuration file loaded");
 */
 void Utils::LogC(const char* msg, ...) {
-	std::string out = formstring("[", MODULE_TITLE, "]| ", msg);
+	std::string out = formstring("[", MODULE_TITLE, "]| ", msg, "\n");
 	Msg(out.c_str());
 }
 
@@ -99,7 +99,7 @@ void Utils::LogC(const char* msg, ...) {
 	Utils::LogC(Color(150, 90, 0, 200), "Configuration file loaded");
 */
 void Utils::LogC(Color& c, const char* msg, ...) {
-	std::string out = formstring("[", MODULE_TITLE, "]| ", msg);
+	std::string out = formstring("[", MODULE_TITLE, "]| ", msg, "\n");
 	ConColorMsg(c, out.c_str());
 }
 
