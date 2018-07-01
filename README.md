@@ -6,7 +6,7 @@ GM Watchdog is a plugin for any GMod server that can detect problems with server
 
 GM WatchDog is written in C++, and needs to be loaded by the server as a module. 
 
-First, WatchDog needs to be built. There is a visual studio project provided: ```watchdog\windows-vs2010\gmsv_watchdog.sln```. The file is configured for use with visual studio 2017, but may work with other versions.
+First, WatchDog needs to be built. There is a visual studio project provided: ```watchdog\windows-vs2010\gmsv_watchdog.sln```. The file is configured for use with visual studio 2017, but may work with other versions. If you don't feel like building it yourself, a binary can be downloaded here: https://drive.google.com/file/d/1N39DHRAS1ichBjcF2i5K7PBksLdVr_BV/view?usp=sharing
 
 If you've already compiled the binary module, or downloaded it pre-built, you can now install it.
 
