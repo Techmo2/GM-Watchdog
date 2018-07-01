@@ -13,6 +13,14 @@
 #include "colors.h"
 #include <cstdarg>
 
+CreateInterfaceFn engineInterface;
+IVEngineServer* engine;
+
+void Utils::init() {
+	engineInterface = Sys_GetFactory("engine.dll");
+	engine = (IVEngineServer*)engineInterface(VENGINESERVER_INTERFACEVERSION_21, NULL);
+}
+
 
 
 /*
@@ -115,6 +123,21 @@ void Utils::LogC(Color& c, const char* msg, ...) {
 	Utils::PrintVersion();
 */
 void Utils::PrintVersion() {
-	std::string out = formstring(MODULE_TITLE, " ", MODULE_VERSION, " (written in c by ", AUTHOR_USERNAME, ")");
+	std::string out = formstring(MODULE_TITLE, " ", MODULE_VERSION, " (written in c by ", AUTHOR_USERNAME, ")", "\n");
 	ConColorMsg(COLOR_LOG, out.c_str());
+}
+
+
+
+/*
+Author - Bradly Tillmann (Techmo)
+Last Update - 7/1/18
+Function -
+	This function sends a command to the server console.
+
+Example -
+	Utils::RunCommand("say hello");
+*/
+void Utils::RunCommand(const char* cmd, ...) {
+	engine->GMOD_RawServerCommand(cmd);
 }

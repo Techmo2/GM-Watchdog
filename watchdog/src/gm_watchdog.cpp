@@ -15,11 +15,14 @@
 #include "watchdog.h"
 #include "module.h"
 #include "utils.h"
+#include <convar.h>
+#include <cdll_int.h>
 #include <iostream>
 #include <stdio.h>
 
 using namespace GarrysMod::Lua;
 Watchdog* dog;
+
 
 // This makes pushing C functions to the lua global stack much cleaner
 int pushFunction(lua_State* state, const char* name, GarrysMod::Lua::CFunc func) {
@@ -37,6 +40,7 @@ int WatchdogStart(lua_State* state) {
 		int timeout = LUA->GetNumber(1);
 		dog = new Watchdog(timeout);
 		dog->Start();
+		Utils::LogC(Color(255, 83, 13, 200), Utils::formstring("Watchdog timer started with timeout of ", std::to_string(timeout).c_str(), " milliseconds").c_str());
 	}
 	return 1;
 }
@@ -44,18 +48,22 @@ int WatchdogStart(lua_State* state) {
 // Resets the watchdog timer. Needs to be called before the timer runs out.
 int KickDog(lua_State* state) {
 	dog->KickDog();
+	//Utils::LogC(Color(0, 100, 255, 200), "Dog kicked");
 	return 1;
 }
 
 // Called by Garry's Mod when this module is loaded
 GMOD_MODULE_OPEN()
 {
-
+	Utils::init();
 	Utils::PrintVersion();
-	Utils::LogC(Color(255, 83, 13, 200), "Loading timer functions");
 
+	Utils::LogC(Color(255, 83, 13, 200), "Loading timer functions");
 	pushFunction(state, "WatchdogStart", WatchdogStart);
 	pushFunction(state, "KickDog", KickDog);
+
+	Utils::LogC(Color(255, 83, 13, 200), "Enabling hooks without players");
+	Utils::RunCommand("sv_hibernate_think 1"); // Run the "Tick" hook even when nobody is online
 
 	Utils::LogC(Color(255, 83, 13, 200), "done");
 	return 0;
