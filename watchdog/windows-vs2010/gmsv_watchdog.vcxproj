@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -10,12 +10,14 @@
     <ProjectGuid>{E347D555-08C2-AA48-B378-4E7FE6832D13}</ProjectGuid>
     <RootNamespace>gmsv_watchdog</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -27,21 +29,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\lib\windows\</OutDir>
     <IntDir>obj\Release\</IntDir>
-    <TargetName>gmsv_watchdog</TargetName>
+    <TargetName>gmsv_watchdog_win32</TargetName>
     <TargetExt>.dll</TargetExt>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>D:\libs\boost_1_67_0;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\libs\boost_1_67_0\lib32-msvc-14.1;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\include;D:\hl2sdk-gmod\game\client\hl2;D:\hl2sdk-gmod\vstdlib;D:\hl2sdk-gmod\vpc_scripts;D:\hl2sdk-gmod\vgui2;D:\hl2sdk-gmod\utils;D:\hl2sdk-gmod\tier1;D:\hl2sdk-gmod\tier0;D:\hl2sdk-gmod\raytrace;D:\hl2sdk-gmod\mathlib;D:\hl2sdk-gmod\materialsystem;D:\hl2sdk-gmod\lib;D:\hl2sdk-gmod\gcsdk;D:\hl2sdk-gmod\game\shared;D:\hl2sdk-gmod\game\server;D:\hl2sdk-gmod\game\client;D:\hl2sdk-gmod\game;D:\hl2sdk-gmod\fgdlib;D:\hl2sdk-gmod\dx9sdk;D:\hl2sdk-gmod\dx10sdk;D:\hl2sdk-gmod\devtools;D:\hl2sdk-gmod\public\engine;D:\hl2sdk-gmod\public\fgdlib;D:\hl2sdk-gmod\public\filesystem;D:\hl2sdk-gmod\public\Friends;D:\hl2sdk-gmod\public\g15;D:\hl2sdk-gmod\public\game;D:\hl2sdk-gmod\public\haptics;D:\hl2sdk-gmod\public\inputsystem;D:\hl2sdk-gmod\public\jpeglib;D:\hl2sdk-gmod\public\keyframe;D:\hl2sdk-gmod\public\materialsystem;D:\hl2sdk-gmod\public\mathlib;D:\hl2sdk-gmod\public\matsys_controls;D:\hl2sdk-gmod\public\maya;D:\hl2sdk-gmod\public\mdllib;D:\hl2sdk-gmod\public\p4lib;D:\hl2sdk-gmod\public\particles;D:\hl2sdk-gmod\public\phonemeextractor;D:\hl2sdk-gmod\public\scenefilecache;D:\hl2sdk-gmod\public\shaderapi;D:\hl2sdk-gmod\public\shaderlib;D:\hl2sdk-gmod\public\SoundEmitterSystem;D:\hl2sdk-gmod\public\soundsystem;D:\hl2sdk-gmod\public\sourcevr;D:\hl2sdk-gmod\public\steam;D:\hl2sdk-gmod\public\tier0;D:\hl2sdk-gmod\public\tier1;D:\hl2sdk-gmod\public\tier2;D:\hl2sdk-gmod\public\tier3;D:\hl2sdk-gmod\public\togl;D:\hl2sdk-gmod\public\toolframework;D:\hl2sdk-gmod\public\tools;D:\hl2sdk-gmod\public\unicode;D:\hl2sdk-gmod\public\unitlib;D:\hl2sdk-gmod\public\vgui_controls;D:\hl2sdk-gmod\public\vaudio;D:\hl2sdk-gmod\public\vgui;D:\hl2sdk-gmod\public\VGuiMatSurface;D:\hl2sdk-gmod\public\video;D:\hl2sdk-gmod\public\vphysics;D:\hl2sdk-gmod\public\vstdlib;D:\hl2sdk-gmod\public\vtf;D:\hl2sdk-gmod\public\zip;D:\hl2sdk-gmod\public\datamodel;D:\hl2sdk-gmod\public\datacache;D:\hl2sdk-gmod\public\bitmap;D:\hl2sdk-gmod\public\avi;D:\hl2sdk-gmod\public\appframework;D:\hl2sdk-gmod\public;D:\hl2sdk-gmod\common;D:\hl2sdk-gmod;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;GMMODULE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader></PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -57,19 +62,30 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <OutputFile>$(OutDir)gmsv_watchdog.dll</OutputFile>
+      <OutputFile>$(OutDir)gmsv_watchdog_win32.dll</OutputFile>
       <ImportLibrary>..\lib\windows\gmsv_watchdog.lib</ImportLibrary>
+      <AdditionalLibraryDirectories>D:\hl2sdk-gmod\lib\public;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>tier0.lib;tier1.lib;tier2.lib;tier3.lib;bitmap.lib;choreoobjects.lib;dmxloader.lib;mathlib.lib;matsys_controls.lib;nvtristrip.lib;particles.lib;raytrace.lib;steam_api.lib;vgui_controls.lib;vmpi.lib;vstdlib.lib;vtf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\GarrysMod\Lua\Interface.h" />
     <ClInclude Include="..\..\include\GarrysMod\Lua\LuaBase.h" />
     <ClInclude Include="..\..\include\GarrysMod\Lua\Types.h" />
     <ClInclude Include="..\..\include\GarrysMod\Lua\UserData.h" />
+    <ClInclude Include="..\src\colors.h" />
+    <ClInclude Include="..\src\module.h" />
+    <ClInclude Include="..\src\utils.h" />
+    <ClInclude Include="..\src\watchdog.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\gm_watchdog.cpp">
     </ClCompile>
+    <ClCompile Include="..\src\utils.cpp" />
+    <ClCompile Include="..\src\watchdog.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

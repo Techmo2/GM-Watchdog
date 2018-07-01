@@ -27,9 +27,27 @@
     <ClInclude Include="..\..\include\GarrysMod\Lua\UserData.h">
       <Filter>include\GarrysMod\Lua</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\watchdog.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\module.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\colors.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\gm_watchdog.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\watchdog.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\utils.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
