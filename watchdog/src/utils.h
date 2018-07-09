@@ -42,6 +42,8 @@ namespace Utils {
 	std::string formstring(T t, Others... others);
 
 	void RunCommand(const char* cmd, ...);
+
+	void SystemCommand(const char* cmd, ...);
 	
 }
 

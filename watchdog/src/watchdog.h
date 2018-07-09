@@ -20,11 +20,12 @@ private:
 	long timer;
 	int timeout;
 	bool running;
+	const char* path;
 	boost::thread* wthread;
 
 	void WatchdogThread();
 public:
-	Watchdog(int timeout);
+	Watchdog(int timeout, const char* exec);
 	void KickDog();
 	void Start();
 };

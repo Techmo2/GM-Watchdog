@@ -19,9 +19,11 @@
 #include <cdll_int.h>
 #include <iostream>
 #include <stdio.h>
+#include <string>
 
 using namespace GarrysMod::Lua;
 Watchdog* dog;
+char* batchFilePath;
 
 
 // This makes pushing C functions to the lua global stack much cleaner
@@ -37,10 +39,31 @@ int pushFunction(lua_State* state, const char* name, GarrysMod::Lua::CFunc func)
 // Starts the watchdog timer with the appropriate timeout value (in milliseconds)
 int WatchdogStart(lua_State* state) {
 	if (LUA->GetType(1) == Type::NUMBER) {
-		int timeout = LUA->GetNumber(1);
-		dog = new Watchdog(timeout);
-		dog->Start();
-		Utils::LogC(Color(255, 83, 13, 200), Utils::formstring("Watchdog timer started with timeout of ", std::to_string(timeout).c_str(), " milliseconds").c_str());
+
+		// Ensure file exists
+		std::ofstream file("../../watchdog.cfg", std::ios::app);
+		file.close();
+
+		// Read config
+		std::string path;
+		std::ifstream rfile("../../watchdog.cfg");
+		if (rfile.is_open()) {
+			std::getline(rfile, path);
+			rfile.close();
+		}
+
+		// Ensure a batch file is specified
+		if (!std::strcmp(path.c_str(), "")) {
+			int timeout = LUA->GetNumber(1);
+			dog = new Watchdog(timeout, path.c_str());
+			dog->Start();
+			Utils::LogC(Color(255, 83, 13, 200), Utils::formstring("Watchdog timer started with timeout of ", std::to_string(timeout).c_str(), " milliseconds").c_str());
+		}
+		else {
+			Utils::LogC(Color(255, 83, 13, 200), "No batch file specified in watchdog.cfg, stopping server");
+			exit(1);
+		}
+		
 	}
 	return 1;
 }

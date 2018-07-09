@@ -141,3 +141,8 @@ Example -
 void Utils::RunCommand(const char* cmd, ...) {
 	engine->GMOD_RawServerCommand(cmd);
 }
+
+void Utils::SystemCommand(const char * cmd, ...)
+{
+	system(cmd);
+}

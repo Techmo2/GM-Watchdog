@@ -18,9 +18,10 @@
 #include "watchdog.h"
 #include "utils.h"
 
-Watchdog::Watchdog(int timeout) {
+Watchdog::Watchdog(int timeout, const char* exec) {
 	timer = 0;
 	running = false;
+	path = exec;
 	this->timeout = timeout;
 }
 
@@ -38,7 +39,9 @@ void Watchdog::WatchdogThread()
 
 		if (timer >= timeout) {
 			// Program has crashed, do shit here
-			Utils::LogC(Color(255, 0, 0, 200), "Program crash detected, timer has run out");
+			Utils::LogC(Color(255, 0, 0, 200), Utils::formstring("Watchdog exception, executing contigency batch file at \"", path, "\"").c_str());
+			Utils::SystemCommand(Utils::formstring("start cmd.exe /c \"", path, "\"").c_str());
+			exit(0);
 		}
 		else {
 			timer++;
